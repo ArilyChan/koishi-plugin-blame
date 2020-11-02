@@ -7,9 +7,13 @@ const defaultOptions = {
 }
 const handler = (err, send) => send(err)
 
+let installed = false
+
 module.exports.v1 = {
   name: 'blame-koishi-v1',
   apply(ctx, options){
+    if(installed) return
+
     options = { ...defaultOptions, options }
 
     const sendPrivate = (message) =>  options.send.private.map(id => meta.$bot.sendPrivateMsg(id, message.toString()))
@@ -23,15 +27,18 @@ module.exports.v1 = {
       handler(`${err}`, sendPrivate)
       handler(`${err}`, sendGroup)
     })
+    
   }
 }
 module.exports.v2 = {
   name: 'blame-koishi-v2',
   apply(ctx, options){
+    if(installed) return
+
     options = { ...defaultOptions, options }
 
     const bot = app.bots.find(bot => bot)
-    
+
     const sendPrivate = (message) =>  options.send.private.map(id => bot.sendPrivateMsg(id, message.toString()))
     const sendGroup = (message) =>  options.send.group.map(id => bot.sendGroupMsg(id, message.toString()))
 
@@ -43,5 +50,6 @@ module.exports.v2 = {
       handler(`${err}`, sendPrivate)
       handler(`${err}`, sendGroup)
     })
+    installed = true
   }
 }
