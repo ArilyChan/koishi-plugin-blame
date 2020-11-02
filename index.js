@@ -37,7 +37,7 @@ module.exports.v2 = {
 
     options = { ...defaultOptions, options }
 
-    const bot = app.bots.find(bot => bot)
+    const bot = ctx.bots.find(bot => bot)
 
     const sendPrivate = (message) =>  options.send.private.map(id => bot.sendPrivateMsg(id, message.toString()))
     const sendGroup = (message) =>  options.send.group.map(id => bot.sendGroupMsg(id, message.toString()))
