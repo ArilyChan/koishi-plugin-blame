@@ -12,15 +12,15 @@ let installed = false
 module.exports.name = 'blame'
 module.exports.v1 = {
   name: 'blame-koishi-v1',
-  apply(ctx, options){
-    if(installed) return
+  apply (ctx, options) {
+    if (installed) return
     
     options = { ...defaultOptions, ...options }
     if (!options.send.private) options.send.private = []
     if (!options.send.group) options.send.group = []
 
-    const sendPrivate = (message) =>  options.send.private.map(id => ctx.sender.sendPrivateMsg(id, message.toString()))
-    const sendGroup = (message) =>  options.send.group.map(id => ctx.sender.sendGroupMsg(id, message.toString()))
+    const sendPrivate = (message) => options.send.private.map(id => ctx.sender.sendPrivateMsg(id, message.toString()))
+    const sendGroup = (message) => options.send.group.map(id => ctx.sender.sendGroupMsg(id, message.toString()))
 
     if (options.catch.includes('unhandledRejection')) process.on('unhandledRejection', (reason, promise) => {
       handler(`${reason.stack}`, sendPrivate)
@@ -35,8 +35,8 @@ module.exports.v1 = {
 }
 module.exports.v2 = {
   name: 'blame-koishi-v2',
-  apply(ctx, options){
-    if(installed) return
+  apply (ctx, options){
+    if (installed) return
 
     options = { ...defaultOptions, ...options }
     if (!options.send.private) options.send.private = []
@@ -44,8 +44,8 @@ module.exports.v2 = {
 
     const bot = ctx.bots.find(bot => bot)
 
-    const sendPrivate = (message) =>  options.send.private.map(id => bot.sendPrivateMsg(id, message.toString()))
-    const sendGroup = (message) =>  options.send.group.map(id => bot.sendGroupMsg(id, message.toString()))
+    const sendPrivate = (message) => options.send.private.map(id => bot.sendPrivateMsg(id, message.toString()))
+    const sendGroup = (message) => options.send.group.map(id => bot.sendGroupMsg(id, message.toString()))
 
     if (options.catch.includes('unhandledRejection')) process.on('unhandledRejection', (reason, promise) => {
       handler(`${reason.stack}`, sendPrivate)
