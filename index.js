@@ -9,6 +9,7 @@ const handler = (err, send) => send(err)
 
 let installed = false
 
+module.exports.name = 'blame'
 module.exports.v1 = {
   name: 'blame-koishi-v1',
   apply(ctx, options){
