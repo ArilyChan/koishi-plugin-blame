@@ -19,8 +19,8 @@ module.exports.v1 = {
     if (!options.send.private) options.send.private = []
     if (!options.send.group) options.send.group = []
 
-    const sendPrivate = (message) =>  options.send.private.map(id => meta.$bot.sendPrivateMsg(id, message.toString()))
-    const sendGroup = (message) =>  options.send.group.map(id => meta.$bot.sendGroupMsg(id, message.toString()))
+    const sendPrivate = (message) =>  options.send.private.map(id => ctx.sender.sendPrivateMsg(id, message.toString()))
+    const sendGroup = (message) =>  options.send.group.map(id => ctx.sender.sendGroupMsg(id, message.toString()))
 
     if (options.catch.includes('unhandledRejection')) process.on('unhandledRejection', (reason, promise) => {
       handler(`${reason}\n${promise}`, sendPrivate)
