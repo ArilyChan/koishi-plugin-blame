@@ -23,12 +23,12 @@ module.exports.v1 = {
     const sendGroup = (message) =>  options.send.group.map(id => ctx.sender.sendGroupMsg(id, message.toString()))
 
     if (options.catch.includes('unhandledRejection')) process.on('unhandledRejection', (reason, promise) => {
-      handler(`${reason}\n${promise}`, sendPrivate)
-      handler(`${reason}\n${promise}`, sendGroup)
+      handler(`${reason.stack}`, sendPrivate)
+      handler(`${reason.stack}`, sendGroup)
     })
     if (options.catch.includes('uncaughtException')) process.on('uncaughtException', (err, origin) => {
-      handler(`${err}`, sendPrivate)
-      handler(`${err}`, sendGroup)
+      handler(`${err.stack}`, sendPrivate)
+      handler(`${err.stack}`, sendGroup)
     })
     installed = true
   }
