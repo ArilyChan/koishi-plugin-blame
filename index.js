@@ -14,8 +14,10 @@ module.exports.v1 = {
   name: 'blame-koishi-v1',
   apply(ctx, options){
     if(installed) return
-
+    
     options = { ...defaultOptions, options }
+    if (!options.send.private) options.send.private = []
+    if (!options.send.group) options.send.group = []
 
     const sendPrivate = (message) =>  options.send.private.map(id => meta.$bot.sendPrivateMsg(id, message.toString()))
     const sendGroup = (message) =>  options.send.group.map(id => meta.$bot.sendGroupMsg(id, message.toString()))
@@ -37,6 +39,8 @@ module.exports.v2 = {
     if(installed) return
 
     options = { ...defaultOptions, options }
+    if (!options.send.private) options.send.private = []
+    if (!options.send.group) options.send.group = []
 
     const bot = ctx.bots.find(bot => bot)
 
