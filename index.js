@@ -27,7 +27,7 @@ module.exports.v1 = {
       handler(`${err}`, sendPrivate)
       handler(`${err}`, sendGroup)
     })
-    
+    installed = true
   }
 }
 module.exports.v2 = {
